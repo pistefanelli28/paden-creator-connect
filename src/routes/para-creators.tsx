@@ -139,25 +139,8 @@ function CreatorLanding() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="font-display text-2xl font-extrabold">Como funciona</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-4">
-          {[
-            ["Monte seu perfil", "Nichos, métricas, portfólio e faixa de cachê."],
-            ["Receba oportunidades", "Feed personalizado com % de compatibilidade."],
-            ["Demonstre interesse", "Um toque em QUERO PARTICIPAR. Sem textão."],
-            ["Dê Match", "Contatos liberados e negociação direta com a marca."],
-          ].map(([t, d], i) => (
-            <div key={t} className="rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <span className="font-display text-3xl font-extrabold text-gradient-brand">
-                {i + 1}
-              </span>
-              <h3 className="mt-3 text-base font-bold">{t}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HowItWorksCreator />
+
 
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <div className="grid gap-5 md:grid-cols-2">
