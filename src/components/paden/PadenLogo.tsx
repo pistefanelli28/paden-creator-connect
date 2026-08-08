@@ -45,7 +45,7 @@ export function PadenLogo({
         <img
           src={padenLogo.url}
           alt="PADEN — where great collabs begin"
-          className="h-auto w-full max-w-md object-contain"
+          className="h-auto w-full max-w-md rounded-2xl object-contain"
         />
       </span>
     );
