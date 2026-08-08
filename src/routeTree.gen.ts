@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
+import { Route as EmpresaRouteImport } from './routes/empresa'
 import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
 import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
 import { Route as AppIndexRouteImport } from './routes/app.index'
@@ -20,7 +21,10 @@ import { Route as AppMatchesRouteImport } from './routes/app.matches'
 import { Route as AppOportunidadesRouteImport } from './routes/app.oportunidades'
 import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppSalvosRouteImport } from './routes/app.salvos'
+import { Route as EmpresaIndexRouteImport } from './routes/empresa.index'
+import { Route as EmpresaCreatorsRouteImport } from './routes/empresa.creators'
 import { Route as AppOportunidadeIdRouteImport } from './routes/app.oportunidade.$id'
+import { Route as EmpresaCreatorIdRouteImport } from './routes/empresa.creator.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +44,11 @@ const CadastroRoute = CadastroRouteImport.update({
 const CadastroEmpresaRoute = CadastroEmpresaRouteImport.update({
   id: '/cadastro-empresa',
   path: '/cadastro-empresa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresaRoute = EmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParaCreatorsRoute = ParaCreatorsRouteImport.update({
@@ -77,10 +86,25 @@ const AppSalvosRoute = AppSalvosRouteImport.update({
   path: '/salvos',
   getParentRoute: () => AppRoute,
 } as any)
+const EmpresaIndexRoute = EmpresaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaCreatorsRoute = EmpresaCreatorsRouteImport.update({
+  id: '/creators',
+  path: '/creators',
+  getParentRoute: () => EmpresaRoute,
+} as any)
 const AppOportunidadeIdRoute = AppOportunidadeIdRouteImport.update({
   id: '/oportunidade/$id',
   path: '/oportunidade/$id',
   getParentRoute: () => AppRoute,
+} as any)
+const EmpresaCreatorIdRoute = EmpresaCreatorIdRouteImport.update({
+  id: '/creator/$id',
+  path: '/creator/$id',
+  getParentRoute: () => EmpresaRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -88,14 +112,18 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
+  '/empresa': typeof EmpresaRouteWithChildren
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
   '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
+  '/empresa/creators': typeof EmpresaCreatorsRoute
   '/app/': typeof AppIndexRoute
+  '/empresa/': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,8 +135,11 @@ export interface FileRoutesByTo {
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
+  '/empresa/creators': typeof EmpresaCreatorsRoute
   '/app': typeof AppIndexRoute
+  '/empresa': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,14 +147,18 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
+  '/empresa': typeof EmpresaRouteWithChildren
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
   '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
+  '/empresa/creators': typeof EmpresaCreatorsRoute
   '/app/': typeof AppIndexRoute
+  '/empresa/': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -132,14 +167,18 @@ export interface FileRouteTypes {
     | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
+    | '/empresa'
     | '/para-creators'
     | '/para-empresas'
     | '/app/matches'
     | '/app/oportunidades'
     | '/app/perfil'
     | '/app/salvos'
+    | '/empresa/creators'
     | '/app/'
+    | '/empresa/'
     | '/app/oportunidade/$id'
+    | '/empresa/creator/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -151,22 +190,29 @@ export interface FileRouteTypes {
     | '/app/oportunidades'
     | '/app/perfil'
     | '/app/salvos'
+    | '/empresa/creators'
     | '/app'
+    | '/empresa'
     | '/app/oportunidade/$id'
+    | '/empresa/creator/$id'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
+    | '/empresa'
     | '/para-creators'
     | '/para-empresas'
     | '/app/matches'
     | '/app/oportunidades'
     | '/app/perfil'
     | '/app/salvos'
+    | '/empresa/creators'
     | '/app/'
+    | '/empresa/'
     | '/app/oportunidade/$id'
+    | '/empresa/creator/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -174,6 +220,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   CadastroRoute: typeof CadastroRoute
   CadastroEmpresaRoute: typeof CadastroEmpresaRoute
+  EmpresaRoute: typeof EmpresaRouteWithChildren
   ParaCreatorsRoute: typeof ParaCreatorsRoute
   ParaEmpresasRoute: typeof ParaEmpresasRoute
 }
@@ -206,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/cadastro-empresa'
       fullPath: '/cadastro-empresa'
       preLoaderRoute: typeof CadastroEmpresaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresa': {
+      id: '/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof EmpresaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/para-creators': {
@@ -257,12 +311,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSalvosRouteImport
       parentRoute: typeof AppRoute
     }
+    '/empresa/': {
+      id: '/empresa/'
+      path: '/'
+      fullPath: '/empresa/'
+      preLoaderRoute: typeof EmpresaIndexRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/creators': {
+      id: '/empresa/creators'
+      path: '/creators'
+      fullPath: '/empresa/creators'
+      preLoaderRoute: typeof EmpresaCreatorsRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
     '/app/oportunidade/$id': {
       id: '/app/oportunidade/$id'
       path: '/oportunidade/$id'
       fullPath: '/app/oportunidade/$id'
       preLoaderRoute: typeof AppOportunidadeIdRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/empresa/creator/$id': {
+      id: '/empresa/creator/$id'
+      path: '/creator/$id'
+      fullPath: '/empresa/creator/$id'
+      preLoaderRoute: typeof EmpresaCreatorIdRouteImport
+      parentRoute: typeof EmpresaRoute
     }
   }
 }
@@ -287,11 +362,27 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface EmpresaRouteChildren {
+  EmpresaCreatorsRoute: typeof EmpresaCreatorsRoute
+  EmpresaIndexRoute: typeof EmpresaIndexRoute
+  EmpresaCreatorIdRoute: typeof EmpresaCreatorIdRoute
+}
+
+const EmpresaRouteChildren: EmpresaRouteChildren = {
+  EmpresaCreatorsRoute: EmpresaCreatorsRoute,
+  EmpresaIndexRoute: EmpresaIndexRoute,
+  EmpresaCreatorIdRoute: EmpresaCreatorIdRoute,
+}
+
+const EmpresaRouteWithChildren =
+  EmpresaRoute._addFileChildren(EmpresaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   CadastroRoute: CadastroRoute,
   CadastroEmpresaRoute: CadastroEmpresaRoute,
+  EmpresaRoute: EmpresaRouteWithChildren,
   ParaCreatorsRoute: ParaCreatorsRoute,
   ParaEmpresasRoute: ParaEmpresasRoute,
 }
