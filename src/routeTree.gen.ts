@@ -23,7 +23,11 @@ import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppSalvosRouteImport } from './routes/app.salvos'
 import { Route as EmpresaIndexRouteImport } from './routes/empresa.index'
 import { Route as EmpresaCreatorsRouteImport } from './routes/empresa.creators'
+import { Route as EmpresaFavoritosRouteImport } from './routes/empresa.favoritos'
+import { Route as EmpresaNovaOportunidadeRouteImport } from './routes/empresa.nova-oportunidade'
+import { Route as EmpresaOportunidadesRouteImport } from './routes/empresa.oportunidades'
 import { Route as AppOportunidadeIdRouteImport } from './routes/app.oportunidade.$id'
+import { Route as EmpresaCandidatosIdRouteImport } from './routes/empresa.candidatos.$id'
 import { Route as EmpresaCreatorIdRouteImport } from './routes/empresa.creator.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -96,10 +100,30 @@ const EmpresaCreatorsRoute = EmpresaCreatorsRouteImport.update({
   path: '/creators',
   getParentRoute: () => EmpresaRoute,
 } as any)
+const EmpresaFavoritosRoute = EmpresaFavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaNovaOportunidadeRoute = EmpresaNovaOportunidadeRouteImport.update({
+  id: '/nova-oportunidade',
+  path: '/nova-oportunidade',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaOportunidadesRoute = EmpresaOportunidadesRouteImport.update({
+  id: '/oportunidades',
+  path: '/oportunidades',
+  getParentRoute: () => EmpresaRoute,
+} as any)
 const AppOportunidadeIdRoute = AppOportunidadeIdRouteImport.update({
   id: '/oportunidade/$id',
   path: '/oportunidade/$id',
   getParentRoute: () => AppRoute,
+} as any)
+const EmpresaCandidatosIdRoute = EmpresaCandidatosIdRouteImport.update({
+  id: '/candidatos/$id',
+  path: '/candidatos/$id',
+  getParentRoute: () => EmpresaRoute,
 } as any)
 const EmpresaCreatorIdRoute = EmpresaCreatorIdRouteImport.update({
   id: '/creator/$id',
@@ -120,9 +144,13 @@ export interface FileRoutesByFullPath {
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/empresa/creators': typeof EmpresaCreatorsRoute
+  '/empresa/favoritos': typeof EmpresaFavoritosRoute
+  '/empresa/nova-oportunidade': typeof EmpresaNovaOportunidadeRoute
+  '/empresa/oportunidades': typeof EmpresaOportunidadesRoute
   '/app/': typeof AppIndexRoute
   '/empresa/': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/candidatos/$id': typeof EmpresaCandidatosIdRoute
   '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRoutesByTo {
@@ -136,9 +164,13 @@ export interface FileRoutesByTo {
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/empresa/creators': typeof EmpresaCreatorsRoute
+  '/empresa/favoritos': typeof EmpresaFavoritosRoute
+  '/empresa/nova-oportunidade': typeof EmpresaNovaOportunidadeRoute
+  '/empresa/oportunidades': typeof EmpresaOportunidadesRoute
   '/app': typeof AppIndexRoute
   '/empresa': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/candidatos/$id': typeof EmpresaCandidatosIdRoute
   '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRoutesById {
@@ -155,9 +187,13 @@ export interface FileRoutesById {
   '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/empresa/creators': typeof EmpresaCreatorsRoute
+  '/empresa/favoritos': typeof EmpresaFavoritosRoute
+  '/empresa/nova-oportunidade': typeof EmpresaNovaOportunidadeRoute
+  '/empresa/oportunidades': typeof EmpresaOportunidadesRoute
   '/app/': typeof AppIndexRoute
   '/empresa/': typeof EmpresaIndexRoute
   '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
+  '/empresa/candidatos/$id': typeof EmpresaCandidatosIdRoute
   '/empresa/creator/$id': typeof EmpresaCreatorIdRoute
 }
 export interface FileRouteTypes {
@@ -175,9 +211,13 @@ export interface FileRouteTypes {
     | '/app/perfil'
     | '/app/salvos'
     | '/empresa/creators'
+    | '/empresa/favoritos'
+    | '/empresa/nova-oportunidade'
+    | '/empresa/oportunidades'
     | '/app/'
     | '/empresa/'
     | '/app/oportunidade/$id'
+    | '/empresa/candidatos/$id'
     | '/empresa/creator/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -191,9 +231,13 @@ export interface FileRouteTypes {
     | '/app/perfil'
     | '/app/salvos'
     | '/empresa/creators'
+    | '/empresa/favoritos'
+    | '/empresa/nova-oportunidade'
+    | '/empresa/oportunidades'
     | '/app'
     | '/empresa'
     | '/app/oportunidade/$id'
+    | '/empresa/candidatos/$id'
     | '/empresa/creator/$id'
   id:
     | '__root__'
@@ -209,9 +253,13 @@ export interface FileRouteTypes {
     | '/app/perfil'
     | '/app/salvos'
     | '/empresa/creators'
+    | '/empresa/favoritos'
+    | '/empresa/nova-oportunidade'
+    | '/empresa/oportunidades'
     | '/app/'
     | '/empresa/'
     | '/app/oportunidade/$id'
+    | '/empresa/candidatos/$id'
     | '/empresa/creator/$id'
   fileRoutesById: FileRoutesById
 }
@@ -325,12 +373,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmpresaCreatorsRouteImport
       parentRoute: typeof EmpresaRoute
     }
+    '/empresa/favoritos': {
+      id: '/empresa/favoritos'
+      path: '/favoritos'
+      fullPath: '/empresa/favoritos'
+      preLoaderRoute: typeof EmpresaFavoritosRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/nova-oportunidade': {
+      id: '/empresa/nova-oportunidade'
+      path: '/nova-oportunidade'
+      fullPath: '/empresa/nova-oportunidade'
+      preLoaderRoute: typeof EmpresaNovaOportunidadeRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/oportunidades': {
+      id: '/empresa/oportunidades'
+      path: '/oportunidades'
+      fullPath: '/empresa/oportunidades'
+      preLoaderRoute: typeof EmpresaOportunidadesRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
     '/app/oportunidade/$id': {
       id: '/app/oportunidade/$id'
       path: '/oportunidade/$id'
       fullPath: '/app/oportunidade/$id'
       preLoaderRoute: typeof AppOportunidadeIdRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/empresa/candidatos/$id': {
+      id: '/empresa/candidatos/$id'
+      path: '/candidatos/$id'
+      fullPath: '/empresa/candidatos/$id'
+      preLoaderRoute: typeof EmpresaCandidatosIdRouteImport
+      parentRoute: typeof EmpresaRoute
     }
     '/empresa/creator/$id': {
       id: '/empresa/creator/$id'
@@ -364,13 +440,21 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface EmpresaRouteChildren {
   EmpresaCreatorsRoute: typeof EmpresaCreatorsRoute
+  EmpresaFavoritosRoute: typeof EmpresaFavoritosRoute
+  EmpresaNovaOportunidadeRoute: typeof EmpresaNovaOportunidadeRoute
+  EmpresaOportunidadesRoute: typeof EmpresaOportunidadesRoute
   EmpresaIndexRoute: typeof EmpresaIndexRoute
+  EmpresaCandidatosIdRoute: typeof EmpresaCandidatosIdRoute
   EmpresaCreatorIdRoute: typeof EmpresaCreatorIdRoute
 }
 
 const EmpresaRouteChildren: EmpresaRouteChildren = {
   EmpresaCreatorsRoute: EmpresaCreatorsRoute,
+  EmpresaFavoritosRoute: EmpresaFavoritosRoute,
+  EmpresaNovaOportunidadeRoute: EmpresaNovaOportunidadeRoute,
+  EmpresaOportunidadesRoute: EmpresaOportunidadesRoute,
   EmpresaIndexRoute: EmpresaIndexRoute,
+  EmpresaCandidatosIdRoute: EmpresaCandidatosIdRoute,
   EmpresaCreatorIdRoute: EmpresaCreatorIdRoute,
 }
 
