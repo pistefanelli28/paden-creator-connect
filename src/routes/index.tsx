@@ -76,14 +76,14 @@ function RoleChoice() {
             onClick={() => setRole("empresa")}
             className="card-hover group rounded-3xl border border-border bg-card p-7 shadow-soft"
           >
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent-foreground">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
               <Building2 className="h-6 w-6" />
             </span>
             <h2 className="mt-5 font-display text-2xl font-extrabold">SOU EMPRESA</h2>
             <p className="mt-2 text-muted-foreground">
               Quero encontrar creators para minha marca.
             </p>
-            <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-accent-foreground">
+            <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-accent">
               Continuar <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
           </Link>

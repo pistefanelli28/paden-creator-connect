@@ -163,7 +163,7 @@ function NewOpportunity() {
             <Label htmlFor="excl" className="flex items-center gap-2 font-bold">
               <Zap className="h-4 w-4" /> Marcar como EXCLUSIVA PADEN
             </Label>
-            <p className="mt-1 text-xs text-accent-foreground">
+            <p className="mt-1 text-xs text-accent">
               Candidaturas desta oportunidade acontecem exclusivamente pela PADEN.
             </p>
           </div>
