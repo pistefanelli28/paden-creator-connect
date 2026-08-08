@@ -151,7 +151,7 @@ export function CreatorShell({ children }: { children: ReactNode }) {
             {plan === "pro-trial" && (
               <Link
                 to="/planos"
-                className="hidden rounded-full bg-accent-soft px-3 py-1.5 text-xs font-bold text-accent-foreground sm:block"
+                className="hidden rounded-full bg-accent-soft px-3 py-1.5 text-xs font-bold text-accent sm:block"
               >
                 PRO grátis — {trialDaysLeft} dias
               </Link>

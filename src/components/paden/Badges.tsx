@@ -14,7 +14,7 @@ export function Pill({
   const tones = {
     muted: "bg-muted text-muted-foreground",
     primary: "bg-primary-soft text-primary",
-    accent: "bg-accent-soft text-accent-foreground",
+    accent: "bg-accent-soft text-accent",
     success: "bg-success-soft text-success",
     destructive: "bg-destructive/10 text-destructive",
     outline: "border border-border text-muted-foreground",

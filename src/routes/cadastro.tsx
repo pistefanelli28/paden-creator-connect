@@ -139,7 +139,7 @@ function CreatorOnboarding() {
               {isMinor && (
                 <div className="space-y-2 rounded-2xl bg-accent-soft p-4">
                   <GuardianBadge status="pendente" />
-                  <p className="text-sm text-accent-foreground">
+                  <p className="text-sm text-accent">
                     A PADEN aceita creators a partir de 16 anos. Com 16 ou 17 anos é necessário o
                     fluxo de autorização do responsável legal antes de participar de oportunidades.
                   </p>
