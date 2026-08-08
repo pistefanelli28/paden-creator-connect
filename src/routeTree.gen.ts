@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
 import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroRoute = CadastroRouteImport.update({
+  id: '/cadastro',
+  path: '/cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroEmpresaRoute = CadastroEmpresaRouteImport.update({
+  id: '/cadastro-empresa',
+  path: '/cadastro-empresa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParaCreatorsRoute = ParaCreatorsRouteImport.update({
@@ -31,30 +43,54 @@ const ParaEmpresasRoute = ParaEmpresasRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/para-creators' | '/para-empresas'
+  fullPaths:
+    | '/'
+    | '/cadastro'
+    | '/cadastro-empresa'
+    | '/para-creators'
+    | '/para-empresas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/para-creators' | '/para-empresas'
-  id: '__root__' | '/' | '/para-creators' | '/para-empresas'
+  to:
+    | '/'
+    | '/cadastro'
+    | '/cadastro-empresa'
+    | '/para-creators'
+    | '/para-empresas'
+  id:
+    | '__root__'
+    | '/'
+    | '/cadastro'
+    | '/cadastro-empresa'
+    | '/para-creators'
+    | '/para-empresas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CadastroRoute: typeof CadastroRoute
+  CadastroEmpresaRoute: typeof CadastroEmpresaRoute
   ParaCreatorsRoute: typeof ParaCreatorsRoute
   ParaEmpresasRoute: typeof ParaEmpresasRoute
 }
@@ -66,6 +102,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro': {
+      id: '/cadastro'
+      path: '/cadastro'
+      fullPath: '/cadastro'
+      preLoaderRoute: typeof CadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro-empresa': {
+      id: '/cadastro-empresa'
+      path: '/cadastro-empresa'
+      fullPath: '/cadastro-empresa'
+      preLoaderRoute: typeof CadastroEmpresaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/para-creators': {
@@ -87,6 +137,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CadastroRoute: CadastroRoute,
+  CadastroEmpresaRoute: CadastroEmpresaRoute,
   ParaCreatorsRoute: ParaCreatorsRoute,
   ParaEmpresasRoute: ParaEmpresasRoute,
 }
