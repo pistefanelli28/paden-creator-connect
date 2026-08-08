@@ -95,14 +95,14 @@ function TopBar({
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4">
-        <Link to={audience === "creator" ? "/app" : "/empresa"} aria-label="PADEN">
+        <Link to={(audience === "creator" ? "/app" : "/empresa") as never} aria-label="PADEN">
           <PadenLogo />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
-              to={item.to}
+              to={item.to as never}
               activeOptions={{ exact: item.to === "/app" || item.to === "/empresa" }}
               className="rounded-full px-3 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground data-[status=active]:bg-primary-soft data-[status=active]:text-primary"
             >
@@ -126,7 +126,7 @@ function BottomNav({ nav }: { nav: NavItem[] }) {
         {nav.map((item) => (
           <Link
             key={item.to}
-            to={item.to}
+            to={item.to as never}
             activeOptions={{ exact: item.to === "/app" || item.to === "/empresa" }}
             className="flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-semibold text-muted-foreground data-[status=active]:text-primary"
           >
