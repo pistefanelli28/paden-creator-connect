@@ -16,8 +16,11 @@ import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
 import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppMatchesRouteImport } from './routes/app.matches'
 import { Route as AppOportunidadesRouteImport } from './routes/app.oportunidades'
+import { Route as AppPerfilRouteImport } from './routes/app.perfil'
 import { Route as AppSalvosRouteImport } from './routes/app.salvos'
+import { Route as AppOportunidadeIdRouteImport } from './routes/app.oportunidade.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -54,14 +57,29 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMatchesRoute = AppMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppOportunidadesRoute = AppOportunidadesRouteImport.update({
   id: '/oportunidades',
   path: '/oportunidades',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPerfilRoute = AppPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSalvosRoute = AppSalvosRouteImport.update({
   id: '/salvos',
   path: '/salvos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOportunidadeIdRoute = AppOportunidadeIdRouteImport.update({
+  id: '/oportunidade/$id',
+  path: '/oportunidade/$id',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -72,9 +90,12 @@ export interface FileRoutesByFullPath {
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/app/': typeof AppIndexRoute
+  '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,9 +103,12 @@ export interface FileRoutesByTo {
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/app': typeof AppIndexRoute
+  '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,9 +118,12 @@ export interface FileRoutesById {
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/perfil': typeof AppPerfilRoute
   '/app/salvos': typeof AppSalvosRoute
   '/app/': typeof AppIndexRoute
+  '/app/oportunidade/$id': typeof AppOportunidadeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,9 +134,12 @@ export interface FileRouteTypes {
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/matches'
     | '/app/oportunidades'
+    | '/app/perfil'
     | '/app/salvos'
     | '/app/'
+    | '/app/oportunidade/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -117,9 +147,12 @@ export interface FileRouteTypes {
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/matches'
     | '/app/oportunidades'
+    | '/app/perfil'
     | '/app/salvos'
     | '/app'
+    | '/app/oportunidade/$id'
   id:
     | '__root__'
     | '/'
@@ -128,9 +161,12 @@ export interface FileRouteTypes {
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/matches'
     | '/app/oportunidades'
+    | '/app/perfil'
     | '/app/salvos'
     | '/app/'
+    | '/app/oportunidade/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -193,11 +229,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/matches': {
+      id: '/app/matches'
+      path: '/matches'
+      fullPath: '/app/matches'
+      preLoaderRoute: typeof AppMatchesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/oportunidades': {
       id: '/app/oportunidades'
       path: '/oportunidades'
       fullPath: '/app/oportunidades'
       preLoaderRoute: typeof AppOportunidadesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/perfil': {
+      id: '/app/perfil'
+      path: '/perfil'
+      fullPath: '/app/perfil'
+      preLoaderRoute: typeof AppPerfilRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/salvos': {
@@ -207,19 +257,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSalvosRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/oportunidade/$id': {
+      id: '/app/oportunidade/$id'
+      path: '/oportunidade/$id'
+      fullPath: '/app/oportunidade/$id'
+      preLoaderRoute: typeof AppOportunidadeIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppMatchesRoute: typeof AppMatchesRoute
   AppOportunidadesRoute: typeof AppOportunidadesRoute
+  AppPerfilRoute: typeof AppPerfilRoute
   AppSalvosRoute: typeof AppSalvosRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppOportunidadeIdRoute: typeof AppOportunidadeIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppMatchesRoute: AppMatchesRoute,
   AppOportunidadesRoute: AppOportunidadesRoute,
+  AppPerfilRoute: AppPerfilRoute,
   AppSalvosRoute: AppSalvosRoute,
   AppIndexRoute: AppIndexRoute,
+  AppOportunidadeIdRoute: AppOportunidadeIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
