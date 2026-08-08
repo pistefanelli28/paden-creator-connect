@@ -73,7 +73,13 @@ export const GuardianBadge = ({ status }: { status: "pendente" | "verificado" })
     </Pill>
   );
 
-export function CompatScore({ score, className }: { score: number; className?: string }) {
+export function CompatScore({
+  score,
+  className,
+}: {
+  score: number;
+  className?: string | undefined;
+}) {
   return (
     <span
       className={cn(
