@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
+import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParaCreatorsRoute = ParaCreatorsRouteImport.update({
+  id: '/para-creators',
+  path: '/para-creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParaEmpresasRoute = ParaEmpresasRouteImport.update({
+  id: '/para-empresas',
+  path: '/para-empresas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/para-creators': typeof ParaCreatorsRoute
+  '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/para-creators': typeof ParaCreatorsRoute
+  '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/para-creators': typeof ParaCreatorsRoute
+  '/para-empresas': typeof ParaEmpresasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/para-creators' | '/para-empresas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/para-creators' | '/para-empresas'
+  id: '__root__' | '/' | '/para-creators' | '/para-empresas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ParaCreatorsRoute: typeof ParaCreatorsRoute
+  ParaEmpresasRoute: typeof ParaEmpresasRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +68,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/para-creators': {
+      id: '/para-creators'
+      path: '/para-creators'
+      fullPath: '/para-creators'
+      preLoaderRoute: typeof ParaCreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/para-empresas': {
+      id: '/para-empresas'
+      path: '/para-empresas'
+      fullPath: '/para-empresas'
+      preLoaderRoute: typeof ParaEmpresasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ParaCreatorsRoute: ParaCreatorsRoute,
+  ParaEmpresasRoute: ParaEmpresasRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
