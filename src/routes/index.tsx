@@ -42,6 +42,7 @@ function RoleChoice() {
         </header>
 
         <div className="animate-rise max-w-2xl space-y-3">
+          <PadenLogo variant="full" className="mb-2 w-full max-w-lg" />
           <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
             <Sparkles className="h-3.5 w-3.5" /> São Paulo capital
           </span>
