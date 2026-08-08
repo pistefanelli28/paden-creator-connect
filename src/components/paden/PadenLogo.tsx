@@ -1,26 +1,32 @@
 import { cn } from "@/lib/utils";
-import padenMark from "@/assets/paden-mark.png";
-import padenLogoHero from "@/assets/paden-logo-hero.png";
+import padenLogo from "@/assets/paden-logo.png.asset.json";
 
 /**
- * Marca PADEN: o símbolo oficial (bicho-preguiça sorrindo sobre a ponte),
- * recortado com fundo transparente para assentar em qualquer superfície.
+ * Marca PADEN: recorte do símbolo oficial (o "D" que abraça a bicho-preguiça
+ * sobre a ponte roxo→laranja) usado como ícone compacto.
  */
 export function PadenMark({ className }: { className?: string | undefined }) {
   return (
-    <img
-      src={padenMark}
-      alt=""
+    <span
+      className={cn(
+        "relative inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-surface-deep",
+        className,
+      )}
       aria-hidden="true"
-      loading="lazy"
-      className={cn("h-9 w-9 shrink-0 object-contain", className)}
-    />
+    >
+      <img
+        src={padenLogo.url}
+        alt=""
+        className="h-full w-full scale-[3.6] object-cover object-[62%_46%]"
+        loading="lazy"
+      />
+    </span>
   );
 }
 
 /**
- * Logo completo. `variant="full"` mostra a arte oficial inteira com fundo
- * transparente (hero, rodapé). O padrão combina marca + wordmark para navs.
+ * Logo completo. `variant="full"` mostra a arte oficial inteira (hero, rodapé,
+ * telas de boas-vindas). O padrão combina marca + wordmark para barras de nav.
  */
 export function PadenLogo({
   className,
@@ -35,11 +41,13 @@ export function PadenLogo({
 }) {
   if (variant === "full") {
     return (
-      <img
-        src={padenLogoHero}
-        alt="PADEN — where great collabs begin"
-        className={cn("h-auto w-full max-w-md object-contain", className)}
-      />
+      <span className={cn("inline-flex flex-col items-start", className)}>
+        <img
+          src={padenLogo.url}
+          alt="PADEN — where great collabs begin"
+          className="h-auto w-full max-w-md rounded-2xl object-contain"
+        />
+      </span>
     );
   }
 
