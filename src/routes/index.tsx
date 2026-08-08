@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Play, Sparkles, Users } from "lucide-react";
 import { PadenLogo } from "@/components/paden/PadenLogo";
 import { HowItWorksCreator, HowItWorksBusiness } from "@/components/paden/HowItWorks";
+import { Glossary } from "@/components/paden/Glossary";
 import { usePaden } from "@/lib/paden-store";
 
 export const Route = createFileRoute("/")({
@@ -94,10 +95,14 @@ function Home() {
         </p>
       </div>
 
-      <section id="como-funciona" className="scroll-mt-20 border-t border-border/50 pb-20">
+      <section id="como-funciona" className="scroll-mt-20 border-t border-border/50">
         <HowItWorksCreator />
         <HowItWorksBusiness />
       </section>
+
+      <div className="border-t border-border/50 pb-20">
+        <Glossary />
+      </div>
     </div>
   );
 }
