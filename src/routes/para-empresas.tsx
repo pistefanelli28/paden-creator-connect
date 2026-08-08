@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { PadenLogo } from "@/components/paden/PadenLogo";
 import { CompatScore, MetricsBadge, Pill, VerifiedBadge } from "@/components/paden/Badges";
 import { InitialsAvatar } from "@/components/paden/InitialsAvatar";
+import { HowItWorksBusiness } from "@/components/paden/HowItWorks";
 import { compatibility, creators, formatFollowers, opportunities } from "@/data/paden";
 
 export const Route = createFileRoute("/para-empresas")({
