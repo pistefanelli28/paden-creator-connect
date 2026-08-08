@@ -114,25 +114,8 @@ function BusinessLanding() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="font-display text-2xl font-extrabold">Do anúncio ao Match</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-4">
-          {[
-            ["Publique a oportunidade", "Cachê, permuta ou cachê + permuta, com valor claro."],
-            ["Receba candidatos", "Ordene por compatibilidade, seguidores ou engajamento."],
-            ["Convide creators", "Busca ativa e convites diretos nos planos pagos."],
-            ["Dê Match", "Contatos liberados e negociação direta, fora da PADEN."],
-          ].map(([t, d], i) => (
-            <div key={t} className="rounded-3xl border border-border bg-card p-5 shadow-soft">
-              <span className="font-display text-3xl font-extrabold text-gradient-brand">
-                {i + 1}
-              </span>
-              <h3 className="mt-3 text-base font-bold">{t}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HowItWorksBusiness />
+
 
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <div className="rounded-3xl border border-border bg-gradient-soft p-6 md:p-8">
