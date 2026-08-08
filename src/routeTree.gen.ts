@@ -10,12 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as EmpresaRouteImport } from './routes/empresa'
 import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
 import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
+import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppMatchesRouteImport } from './routes/app.matches'
 import { Route as AppOportunidadesRouteImport } from './routes/app.oportunidades'
@@ -33,6 +35,11 @@ import { Route as EmpresaCreatorIdRouteImport } from './routes/empresa.creator.$
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -63,6 +70,11 @@ const ParaCreatorsRoute = ParaCreatorsRouteImport.update({
 const ParaEmpresasRoute = ParaEmpresasRouteImport.update({
   id: '/para-empresas',
   path: '/para-empresas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -133,12 +145,14 @@ const EmpresaCreatorIdRoute = EmpresaCreatorIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/empresa': typeof EmpresaRouteWithChildren
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/planos': typeof PlanosRoute
   '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
@@ -155,10 +169,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/planos': typeof PlanosRoute
   '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
@@ -176,12 +192,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/empresa': typeof EmpresaRouteWithChildren
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/planos': typeof PlanosRoute
   '/app/matches': typeof AppMatchesRoute
   '/app/oportunidades': typeof AppOportunidadesRoute
   '/app/perfil': typeof AppPerfilRoute
@@ -200,12 +218,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/planos'
     | '/app/matches'
     | '/app/oportunidades'
     | '/app/perfil'
@@ -222,10 +242,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/planos'
     | '/app/matches'
     | '/app/oportunidades'
     | '/app/perfil'
@@ -242,12 +264,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/planos'
     | '/app/matches'
     | '/app/oportunidades'
     | '/app/perfil'
@@ -265,12 +289,14 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AppRoute: typeof AppRouteWithChildren
   CadastroRoute: typeof CadastroRoute
   CadastroEmpresaRoute: typeof CadastroEmpresaRoute
   EmpresaRoute: typeof EmpresaRouteWithChildren
   ParaCreatorsRoute: typeof ParaCreatorsRoute
   ParaEmpresasRoute: typeof ParaEmpresasRoute
+  PlanosRoute: typeof PlanosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -280,6 +306,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app': {
@@ -322,6 +355,13 @@ declare module '@tanstack/react-router' {
       path: '/para-empresas'
       fullPath: '/para-empresas'
       preLoaderRoute: typeof ParaEmpresasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -463,12 +503,14 @@ const EmpresaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AppRoute: AppRouteWithChildren,
   CadastroRoute: CadastroRoute,
   CadastroEmpresaRoute: CadastroEmpresaRoute,
   EmpresaRoute: EmpresaRouteWithChildren,
   ParaCreatorsRoute: ParaCreatorsRoute,
   ParaEmpresasRoute: ParaEmpresasRoute,
+  PlanosRoute: PlanosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
