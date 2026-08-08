@@ -25,9 +25,9 @@ export type MatchItem = {
   creatorId: string;
   companyId: string;
   daysAgo: number;
-  outcome?: "fechamos" | "conversando" | "nao-rolou";
-  confirmed?: boolean;
-  rated?: boolean;
+  outcome?: "fechamos" | "conversando" | "nao-rolou" | undefined;
+  confirmed?: boolean | undefined;
+  rated?: boolean | undefined;
 };
 
 export type Notification = {
@@ -36,7 +36,7 @@ export type Notification = {
   icon: string;
   title: string;
   text: string;
-  read?: boolean;
+  read?: boolean | undefined;
 };
 
 type State = {
@@ -159,8 +159,8 @@ export function PadenProvider({ children }: { children: ReactNode }) {
   const value = useMemo<Ctx>(
     () => ({
       ...state,
-      currentCreator: creators[0],
-      currentCompany: companies[0],
+      currentCreator: creators[0]!,
+      currentCompany: companies[0]!,
       isPro,
       applicationLimit,
       savedLimit,
