@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
  * Marca PADEN: duas formas diferentes que se encontram e se encaixam
  * (creator + marca = match). Sem câmera, coração, @ ou aperto de mãos.
  */
-export function PadenMark({ className }: { className?: string }) {
+export function PadenMark({ className }: { className?: string | undefined }) {
   return (
     <span
       className={cn(
