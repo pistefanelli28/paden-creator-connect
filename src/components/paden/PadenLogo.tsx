@@ -1,32 +1,26 @@
 import { cn } from "@/lib/utils";
-import padenLogo from "@/assets/paden-logo.png.asset.json";
+import padenMark from "@/assets/paden-mark.png";
+import padenLogoHero from "@/assets/paden-logo-hero.png";
 
 /**
- * Marca PADEN: recorte do símbolo oficial (o "D" que abraça a bicho-preguiça
- * sobre a ponte roxo→laranja) usado como ícone compacto.
+ * Marca PADEN: o símbolo oficial (bicho-preguiça sorrindo sobre a ponte),
+ * recortado com fundo transparente para assentar em qualquer superfície.
  */
 export function PadenMark({ className }: { className?: string | undefined }) {
   return (
-    <span
-      className={cn(
-        "relative inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-surface-deep",
-        className,
-      )}
+    <img
+      src={padenMark}
+      alt=""
       aria-hidden="true"
-    >
-      <img
-        src={padenLogo.url}
-        alt=""
-        className="h-full w-full scale-[3.6] object-cover object-[62%_46%]"
-        loading="lazy"
-      />
-    </span>
+      loading="lazy"
+      className={cn("h-9 w-9 shrink-0 object-contain", className)}
+    />
   );
 }
 
 /**
- * Logo completo. `variant="full"` mostra a arte oficial inteira (hero, rodapé,
- * telas de boas-vindas). O padrão combina marca + wordmark para barras de nav.
+ * Logo completo. `variant="full"` mostra a arte oficial inteira com fundo
+ * transparente (hero, rodapé). O padrão combina marca + wordmark para navs.
  */
 export function PadenLogo({
   className,
@@ -41,13 +35,11 @@ export function PadenLogo({
 }) {
   if (variant === "full") {
     return (
-      <span className={cn("inline-flex flex-col items-start", className)}>
-        <img
-          src={padenLogo.url}
-          alt="PADEN — where great collabs begin"
-          className="h-auto w-full max-w-md rounded-2xl object-contain"
-        />
-      </span>
+      <img
+        src={padenLogoHero}
+        alt="PADEN — where great collabs begin"
+        className={cn("h-auto w-full max-w-md object-contain", className)}
+      />
     );
   }
 
