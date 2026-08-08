@@ -10,14 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as CadastroRouteImport } from './routes/cadastro'
 import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as ParaCreatorsRouteImport } from './routes/para-creators'
 import { Route as ParaEmpresasRouteImport } from './routes/para-empresas'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppOportunidadesRouteImport } from './routes/app.oportunidades'
+import { Route as AppSalvosRouteImport } from './routes/app.salvos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CadastroRoute = CadastroRouteImport.update({
@@ -40,13 +49,32 @@ const ParaEmpresasRoute = ParaEmpresasRouteImport.update({
   path: '/para-empresas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOportunidadesRoute = AppOportunidadesRouteImport.update({
+  id: '/oportunidades',
+  path: '/oportunidades',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSalvosRoute = AppSalvosRouteImport.update({
+  id: '/salvos',
+  path: '/salvos',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/salvos': typeof AppSalvosRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,23 +82,34 @@ export interface FileRoutesByTo {
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/salvos': typeof AppSalvosRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/cadastro': typeof CadastroRoute
   '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/para-creators': typeof ParaCreatorsRoute
   '/para-empresas': typeof ParaEmpresasRoute
+  '/app/oportunidades': typeof AppOportunidadesRoute
+  '/app/salvos': typeof AppSalvosRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/oportunidades'
+    | '/app/salvos'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -78,17 +117,25 @@ export interface FileRouteTypes {
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/oportunidades'
+    | '/app/salvos'
+    | '/app'
   id:
     | '__root__'
     | '/'
+    | '/app'
     | '/cadastro'
     | '/cadastro-empresa'
     | '/para-creators'
     | '/para-empresas'
+    | '/app/oportunidades'
+    | '/app/salvos'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   CadastroRoute: typeof CadastroRoute
   CadastroEmpresaRoute: typeof CadastroEmpresaRoute
   ParaCreatorsRoute: typeof ParaCreatorsRoute
@@ -102,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cadastro': {
@@ -132,11 +186,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParaEmpresasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/oportunidades': {
+      id: '/app/oportunidades'
+      path: '/oportunidades'
+      fullPath: '/app/oportunidades'
+      preLoaderRoute: typeof AppOportunidadesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/salvos': {
+      id: '/app/salvos'
+      path: '/salvos'
+      fullPath: '/app/salvos'
+      preLoaderRoute: typeof AppSalvosRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppOportunidadesRoute: typeof AppOportunidadesRoute
+  AppSalvosRoute: typeof AppSalvosRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppOportunidadesRoute: AppOportunidadesRoute,
+  AppSalvosRoute: AppSalvosRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   CadastroRoute: CadastroRoute,
   CadastroEmpresaRoute: CadastroEmpresaRoute,
   ParaCreatorsRoute: ParaCreatorsRoute,
