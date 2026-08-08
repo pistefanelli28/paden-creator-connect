@@ -11,6 +11,7 @@ import {
   VerifiedBadge,
 } from "@/components/paden/Badges";
 import { InitialsAvatar } from "@/components/paden/InitialsAvatar";
+import { HowItWorksCreator } from "@/components/paden/HowItWorks";
 import {
   compatibility,
   creators,
