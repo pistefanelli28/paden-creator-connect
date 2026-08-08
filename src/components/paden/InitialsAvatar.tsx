@@ -12,8 +12,8 @@ export function InitialsAvatar({
   className,
 }: {
   name: string;
-  size?: "sm" | "md" | "lg" | "xl";
-  className?: string;
+  size?: "sm" | "md" | "lg" | "xl" | undefined;
+  className?: string | undefined;
 }) {
   const initials = name
     .split(" ")

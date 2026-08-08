@@ -8,8 +8,8 @@ export function Pill({
   className,
 }: {
   children: React.ReactNode;
-  tone?: "muted" | "primary" | "accent" | "success" | "destructive" | "outline";
-  className?: string;
+  tone?: "muted" | "primary" | "accent" | "success" | "destructive" | "outline" | undefined;
+  className?: string | undefined;
 }) {
   const tones = {
     muted: "bg-muted text-muted-foreground",

@@ -34,8 +34,8 @@ export function PadenLogo({
   className,
   markClassName,
 }: {
-  className?: string;
-  markClassName?: string;
+  className?: string | undefined;
+  markClassName?: string | undefined;
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
