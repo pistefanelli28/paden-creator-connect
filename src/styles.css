@@ -281,3 +281,55 @@ p {
     transition-duration: 0.01ms !important;
   }
 }
+/* ============================================
+   PADEN CLEANUP — despoluição visual
+   Cole no FINAL de src/styles.css e commite.
+   Mantém a identidade roxo + laranja, só limpa
+   o excesso que estava poluindo a tela.
+   ============================================ */
+
+/* 1) Fundo: uma luz suave no canto, sem ruído */
+body {
+  background:
+    radial-gradient(46rem 26rem at 82% -12%, oklch(0.58 0.235 295 / 0.10), transparent 60%),
+    var(--color-background) !important;
+}
+
+/* 2) Contraste: texto secundário legível e fundo dos cards definido */
+:root {
+  --muted-foreground: oklch(0.8 0.025 300);
+  --card: oklch(0.225 0.045 299);
+  --border: oklch(0.33 0.05 298);
+}
+
+/* 3) Cards uniformes: borda visível para separar do fundo */
+.shadow-soft,
+.shadow-card {
+  border-color: color-mix(in oklch, var(--color-border) 85%, transparent);
+}
+
+/* 4) Hover do card: leve, elegante, sem exagero */
+.shadow-soft:hover,
+.shadow-card:hover {
+  transform: translateY(-2px);
+  border-color: oklch(0.58 0.235 295 / 0.35);
+  box-shadow: 0 12px 28px -18px oklch(0 0 0 / 0.5);
+}
+
+/* 5) Botões principais: menos brilho, visual premium limpo */
+.bg-gradient-brand {
+  background: linear-gradient(120deg, oklch(0.56 0.21 295), oklch(0.64 0.19 297)) !important;
+  box-shadow: 0 8px 20px -12px oklch(0 0 0 / 0.45) !important;
+}
+
+/* 6) Tipografia: entrelinha confortável em todo o site */
+p,
+li,
+a {
+  line-height: 1.65;
+}
+
+/* 7) Menos "CAPS gritando": espaçamento de letras suave */
+.uppercase {
+  letter-spacing: 0.05em !important;
+}
