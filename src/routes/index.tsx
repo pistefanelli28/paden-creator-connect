@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Play, Sparkles, Users } from "lucide-react";
 import { PadenLogo } from "@/components/paden/PadenLogo";
 import { HowItWorksCreator, HowItWorksBusiness } from "@/components/paden/HowItWorks";
-import { Glossary } from "@/components/paden/Glossary";
+
 import { usePaden } from "@/lib/paden-store";
 
 export const Route = createFileRoute("/")({
@@ -64,12 +64,18 @@ function Home() {
           >
             <Play className="h-4 w-4 text-primary" /> Como funciona
           </a>
-          <Link
-            to="/planos"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-6 py-3 text-sm font-bold text-foreground shadow-soft hover:bg-surface-raised"
-          >
-            Planos
-          </Link>
+        <Link
+        to="/planos"
+        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-6 py-3 text-sm font-bold text-foreground shadow-soft hover:bg-surface-raised"
+      >
+        Planos
+      </Link>
+      <Link
+        to="/Significado da PADEN"
+        className="inline-flex items-center justify-center gap-2 rounded-2xl border border-border bg-card px-6 py-3 text-sm font-bold text-foreground shadow-soft hover:bg-surface-raised"
+      >
+        O que significa cada coisa
+      </Link>
         </div>
 
         <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-2">
@@ -99,9 +105,6 @@ function Home() {
         <HowItWorksCreator />
         <HowItWorksBusiness />
       </section>
-
-      <div className="border-t border-border/50 pb-20">
-        <Glossary />
       </div>
     </div>
   );
