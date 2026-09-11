@@ -1,0 +1,138 @@
+import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Building2, MapPin, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PadenLogo } from "@/components/paden/PadenLogo";
+import { Pill } from "@/components/paden/Badges";
+import { getCompany, offerLabel, opportunities } from "@/data/paden";
+
+export const Route = createFileRoute("/experiencias")({
+  head: () => ({
+    meta: [
+      { title: "Experiências PADEN — Oportunidades em São Paulo" },
+      {
+        name: "description",
+        content:
+          "Descubra experiências, campanhas, lançamentos e collabs entre creators e marcas de São Paulo.",
+      },
+      { property: "og:title", content: "Experiências PADEN" },
+      {
+        property: "og:description",
+        content: "Oportunidades de collabs, permutas e campanhas em SP.",
+      },
+    ],
+  }),
+  component: Experiences,
+});
+
+const FILTERS = ["Todas", "Cachê", "Permuta", "Cachê + Permuta"];
+
+function Experiences() {
+  const [filter, setFilter] = useState("Todas");
+  const list = opportunities.filter(
+    (o) => !o.closed && (filter === "Todas" || o.dealType === filter),
+  );
+
+  return (
+    <div className="min-h-screen">
+      <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
+        <Link to="/" aria-label="PADEN">
+          <PadenLogo />
+        </Link>
+        <div className="flex items-center gap-2">
+          <Button asChild variant="ghost" size="sm">
+            <Link to="/para-creators">Sou creator</Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link to="/para-empresas">Sou empresa</Link>
+          </Button>
+          <Button asChild variant="brand" size="sm">
+            <Link to="/cadastro">CRIAR CONTA</Link>
+          </Button>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-6xl px-4 pb-16">
+        <div className="max-w-2xl space-y-4 py-10">
+          <Pill tone="accent">
+            <Sparkles className="h-3.5 w-3.5" /> Oportunidades em São Paulo
+          </Pill>
+          <h1 className="font-display text-4xl font-extrabold leading-tight md:text-5xl">
+            Experiências para <span className="text-gradient-brand">colaborar.</span>
+          </h1>
+          <p className="text-base text-muted-foreground">
+            Campanhas, lançamentos, eventos e collabs de marcas que buscam creators como você.
+            Filtre e encontre a sua próxima oportunidade.
+          </p>
+        </div>
+
+        <div className="mb-6 flex flex-wrap gap-2">
+          {FILTERS.map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              className={
+                filter === f
+                  ? "rounded-full bg-gradient-brand px-4 py-2 text-sm font-bold text-primary-foreground"
+                  : "rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground"
+              }
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <p className="mb-6 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {list.length} {list.length === 1 ? "oportunidade" : "oportunidades"}
+        </p>
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {list.map((o) => {
+            const company = getCompany(o.companyId);
+            return (
+              <article
+                key={o.id}
+                className="overflow-hidden rounded-3xl border border-border bg-card shadow-soft"
+              >
+                <div className="relative">
+                  <img
+                    src={o.cover}
+                    alt={`Capa de ${o.title}`}
+                    loading="lazy"
+                    className="h-40 w-full object-cover"
+                  />
+                  <div className="absolute left-3 top-3">
+                    <Pill tone="outline">{o.dealType}</Pill>
+                  </div>
+                </div>
+                <div className="space-y-3 p-5">
+                  <div className="space-y-1">
+                    <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      <Building2 className="h-3.5 w-3.5" /> {company.name} • {o.niche}
+                    </p>
+                    <h3 className="text-lg font-bold leading-snug">{o.title}</h3>
+                    <p className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <MapPin className="h-3.5 w-3.5" /> {o.region} — São Paulo
+                    </p>
+                  </div>
+                  <Pill tone="accent">{offerLabel(o)}</Pill>
+                  <p className="text-sm text-muted-foreground">{o.deliverables}</p>
+                  <Button asChild variant="brand" className="w-full">
+                    <Link to="/cadastro">
+                      QUERO PARTICIPAR <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        {list.length === 0 && (
+          <p className="rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground">
+            Nenhuma oportunidade nessa categoria no momento.
+          </p>
+        )}
+      </section>
+    </div>
+  );
+}
