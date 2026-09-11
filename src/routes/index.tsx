@@ -105,7 +105,6 @@ function Home() {
         <HowItWorksCreator />
         <HowItWorksBusiness />
       </section>
-      </div>
     </div>
   );
 }
