@@ -1,0 +1,60 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PadenLogo } from "@/components/paden/PadenLogo";
+import { Glossary } from "@/components/paden/Glossary";
+
+export const Route = createFileRoute("/glossario")({
+  head: () => ({
+    meta: [
+      { title: "Glossário PADEN — o que significa cada coisa" },
+      {
+        name: "description",
+        content:
+          "Selos, porcentagens e etapas da PADEN explicados em uma linha: PADEN Verified, métricas verificadas, compatibilidade, Match, PRO e mais.",
+      },
+      { property: "og:title", content: "Glossário PADEN" },
+      {
+        property: "og:description",
+        content: "Selos, porcentagens e etapas explicados sem letrinha miúda.",
+      },
+    ],
+  }),
+  component: GlossaryPage,
+});
+
+function GlossaryPage() {
+  return (
+    <div className="min-h-screen">
+      <header className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5">
+        <Link to="/" aria-label="PADEN">
+          <PadenLogo />
+        </Link>
+        <Button asChild variant="ghost" size="sm">
+          <Link to="/">
+            <ArrowLeft className="h-4 w-4" /> Voltar
+          </Link>
+        </Button>
+      </header>
+
+      <Glossary />
+
+      <section className="mx-auto max-w-5xl px-4 pb-16">
+        <div className="rounded-3xl border border-border bg-card p-6 text-center shadow-soft md:p-8">
+          <h2 className="font-display text-2xl font-extrabold">Ficou alguma dúvida?</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
+            Crie sua conta e veja esses selos e porcentagens aplicados no seu próprio perfil e feed.
+          </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Button asChild variant="brand" size="lg">
+              <Link to="/cadastro">SOU CREATOR</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/cadastro-empresa">SOU EMPRESA</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
